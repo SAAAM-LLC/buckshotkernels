@@ -34,3 +34,34 @@ No third-party ops—**this is as close to the metal as you can get without chew
 git clone https://github.com/SAAAM-LLC/buckshotkernels.git
 cd buckshotkernels
 pip install -r requirements.txt  # Only needs numpy (and cupy if you want CUDA fallback)
+
+
+###  Why Buckshot?
+
+##  Because sometimes you gotta spray and pray:
+
+    Want max speed with zero bloat?
+
+    Need to slap together a ternary inference engine in the back of a pickup?
+
+    Don’t trust other people’s code or “best practices?”
+
+#  This is for you.
+Supported Platforms
+
+    Linux, Windows, Mac (if you hate yourself)
+
+    x86_64 (AVX2/AVX512), ARM64 (NEON)
+
+    NVIDIA GPUs (CUDA 11.x+)
+
+##  License
+
+#  MIT, because GPL is for lawyers and Apache is for folks with something to lose.
+Contributing
+
+Pull requests, issues, and creative swearing all welcome.
+Disclaimer
+
+No warranty, no guarantees, and if you burn down a datacenter, you’re on your own.
+But you’ll have the fastest damn ternary kernels in the county.
