@@ -1,4 +1,4 @@
-# 🦌 BuckshotKernels
+# 🦌 BuckshotKernels - SAAAM LLC
 
 **Custom CUDA & SIMD C Kernels for Ternary Neural Networks — Written in the Woods, Built for Speed**
 
@@ -34,7 +34,7 @@ No third-party ops—**this is as close to the metal as you can get without chew
 git clone https://github.com/SAAAM-LLC/buckshotkernels.git
 cd buckshotkernels
 pip install -r requirements.txt  # Only needs numpy (and cupy if you want CUDA fallback)
-
+```
 
 ###  Why Buckshot?
 
@@ -65,3 +65,14 @@ Disclaimer
 
 No warranty, no guarantees, and if you burn down a datacenter, you’re on your own.
 But you’ll have the fastest damn ternary kernels in the county.
+
+Example: Custom Ternary Matrix Multiply
+```
+from buckshotkernels import TernaryKernelManager
+
+kernels = TernaryKernelManager()
+A = np.random.choice([-1, 0, 1], size=(512, 512), p=[0.25, 0.5, 0.25]).astype(np.int8)
+B = np.random.choice([-1, 0, 1], size=(512, 512), p=[0.25, 0.5, 0.25]).astype(np.int8)
+
+C = kernels.ternary_matmul(A, B)  # Automatically uses fastest kernel
+```
