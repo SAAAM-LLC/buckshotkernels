@@ -1,0 +1,262 @@
+buckshotkernels.py
+🔍 CUDA Toolkit: Found at /usr
+🚀 TERNARYCORE CUSTOM KERNEL DEMONSTRATION
+============================================================
+💥 Building kernels from scratch - no libraries, pure metal!
+
+🔧 Compiling custom kernels...
+🚀 Initializing TernaryKernelManager...
+🔨 Compiling CPU kernels...
+🔧 CPU compiler: gcc
+🚀 SIMD features: ['SSE2', 'AVX', 'AVX2']
+📁 Temp directory: /tmp/ternary_cpu_kernels_rvruubor
+✅ CPU kernel source written: /tmp/ternary_cpu_kernels_rvruubor/ternary_cpu_kernels.c
+🔨 Compiling CPU kernels...
+Command: gcc -O3 -ffast-math -shared -fPIC -march=native -mavx2 /tmp/ternary_cpu_kernels_rvruubor/ternary_cpu_kernels.c -o /tmp/ternary_cpu_kernels_rvruubor/ternary_cpu_kernels.so
+✅ CPU kernels compiled successfully!
+📦 Library: /tmp/ternary_cpu_kernels_rvruubor/ternary_cpu_kernels.so
+✅ CPU kernels loaded successfully!
+✅ CPU kernels ready!
+🔨 Compiling CUDA kernels...
+🔧 CUDA compiler ready: /usr/bin/nvcc
+📁 Temp directory: /tmp/ternary_kernels_pjc0a4ix
+🎯 Target GPU architecture: sm_61
+✅ CUDA kernel source written: /tmp/ternary_kernels_pjc0a4ix/ternary_kernels.cu
+🔨 Compiling CUDA kernels...
+Command: /usr/bin/nvcc -shared -Xcompiler -fPIC -arch sm_61 --ptxas-options=-v -O3 --use_fast_math -DCUDA_KERNEL_COMPILATION /tmp/ternary_kernels_pjc0a4ix/ternary_kernels.cu -o /tmp/ternary_kernels_pjc0a4ix/ternary_kernels.so
+✅ CUDA kernels compiled successfully!
+📦 Library: /tmp/ternary_kernels_pjc0a4ix/ternary_kernels.so
+Compiler output:
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'ternary_reduce_sum_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_reduce_sum_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, 344 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_quantize_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_quantize_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 6 registers, 344 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_conv2d_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_conv2d_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 31 registers, 396 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_matmul_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_matmul_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, 512 bytes smem, 356 bytes cmem[0]
+
+✅ CUDA kernels loaded successfully!
+✅ CUDA kernels ready!
+
+🧪 Testing custom kernels...
+🎯 Test matrices: (512, 512) @ (512, 512)
+   Sparsity A: 49.9%
+   Sparsity B: 49.8%
+
+⚡ Testing ternary matrix multiplication...
+🖥 CPU kernel: 512x512 @ 512x512 in 37.14ms
+❌ Results differ from NumPy
+   Max difference: 8926
+
+⚡ Testing ternary quantization...
+⚡ Quantized 1,000,000 elements in 0.37ms
+✅ Quantized values: [-1  0  1]
+   Elements processed: 1,000,000
+   Throughput: 1694.7 Melem/s
+
+🎯 Testing OptimizedTernaryTensor...
+🔧 Initializing kernel manager...
+🚀 Initializing TernaryKernelManager...
+🔨 Compiling CPU kernels...
+🔧 CPU compiler: gcc
+🚀 SIMD features: ['SSE2', 'AVX', 'AVX2']
+📁 Temp directory: /tmp/ternary_cpu_kernels_7410krw_
+✅ CPU kernel source written: /tmp/ternary_cpu_kernels_7410krw_/ternary_cpu_kernels.c
+🔨 Compiling CPU kernels...
+Command: gcc -O3 -ffast-math -shared -fPIC -march=native -mavx2 /tmp/ternary_cpu_kernels_7410krw_/ternary_cpu_kernels.c -o /tmp/ternary_cpu_kernels_7410krw_/ternary_cpu_kernels.so
+✅ CPU kernels compiled successfully!
+📦 Library: /tmp/ternary_cpu_kernels_7410krw_/ternary_cpu_kernels.so
+✅ CPU kernels loaded successfully!
+✅ CPU kernels ready!
+🔨 Compiling CUDA kernels...
+🔧 CUDA compiler ready: /usr/bin/nvcc
+📁 Temp directory: /tmp/ternary_kernels_i4pcgrvs
+🎯 Target GPU architecture: sm_61
+✅ CUDA kernel source written: /tmp/ternary_kernels_i4pcgrvs/ternary_kernels.cu
+🔨 Compiling CUDA kernels...
+Command: /usr/bin/nvcc -shared -Xcompiler -fPIC -arch sm_61 --ptxas-options=-v -O3 --use_fast_math -DCUDA_KERNEL_COMPILATION /tmp/ternary_kernels_i4pcgrvs/ternary_kernels.cu -o /tmp/ternary_kernels_i4pcgrvs/ternary_kernels.so
+✅ CUDA kernels compiled successfully!
+📦 Library: /tmp/ternary_kernels_i4pcgrvs/ternary_kernels.so
+Compiler output:
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'ternary_reduce_sum_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_reduce_sum_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, 344 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_quantize_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_quantize_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 6 registers, 344 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_conv2d_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_conv2d_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 31 registers, 396 bytes cmem[0]
+ptxas info    : Compiling entry function 'ternary_matmul_kernel' for 'sm_61'
+ptxas info    : Function properties for ternary_matmul_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, 512 bytes smem, 356 bytes cmem[0]
+
+✅ CUDA kernels loaded successfully!
+✅ CUDA kernels ready!
+🖥 CPU kernel: 512x512 @ 512x512 in 27.63ms
+✅ Tensor operation: 28.08ms
+   Result shape: (512, 512)
+   Result dtype: int8
+
+📊 Running comprehensive benchmark...
+🏃 BENCHMARKING CUSTOM KERNELS
+==================================================
+
+🎯 Testing 256x256 matrices...
+  🖥 Testing CPU kernel...
+🖥 CPU kernel: 256x256 @ 256x256 in 1.89ms
+🖥 CPU kernel: 256x256 @ 256x256 in 1.89ms
+🖥 CPU kernel: 256x256 @ 256x256 in 1.62ms
+🖥 CPU kernel: 256x256 @ 256x256 in 1.71ms
+🖥 CPU kernel: 256x256 @ 256x256 in 2.25ms
+  🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 256x256 @ 256x256 in 3477.47ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.44ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.33ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.35ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.27ms
+  ⚠ CPU and CUDA results differ
+  ⚡ Testing quantization kernel...
+⚡ Quantized 65,536 elements in 0.07ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.02ms
+    CPU: 1.98ms (16.95 GFLOPS)
+    CUDA: 845.04ms (0.04 GFLOPS, 0.00x speedup)
+    Quantization: 0.06ms (1034.1 Melem/s)
+
+🎯 Testing 512x512 matrices...
+  🖥 Testing CPU kernel...
+🖥 CPU kernel: 512x512 @ 512x512 in 15.44ms
+🖥 CPU kernel: 512x512 @ 512x512 in 15.26ms
+🖥 CPU kernel: 512x512 @ 512x512 in 14.18ms
+🖥 CPU kernel: 512x512 @ 512x512 in 14.51ms
+🖥 CPU kernel: 512x512 @ 512x512 in 13.55ms
+  🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.72ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.37ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.34ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.38ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.35ms
+  ⚠ CPU and CUDA results differ
+  ⚡ Testing quantization kernel...
+⚡ Quantized 262,144 elements in 0.06ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+    CPU: 14.84ms (18.09 GFLOPS)
+    CUDA: 0.95ms (283.10 GFLOPS, 15.65x speedup)
+    Quantization: 0.09ms (2899.2 Melem/s)
+
+🎯 Testing 1024x1024 matrices...
+  🖥 Testing CPU kernel...
+🖥 CPU kernel: 1024x1024 @ 1024x1024 in 123.28ms
+🖥 CPU kernel: 1024x1024 @ 1024x1024 in 122.08ms
+🖥 CPU kernel: 1024x1024 @ 1024x1024 in 123.81ms
+🖥 CPU kernel: 1024x1024 @ 1024x1024 in 119.34ms
+🖥 CPU kernel: 1024x1024 @ 1024x1024 in 116.31ms
+  🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 1.69ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.92ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.92ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.91ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.89ms
+  ⚠ CPU and CUDA results differ
+  ⚡ Testing quantization kernel...
+⚡ Quantized 1,048,576 elements in 0.49ms
+⚡ Quantized 1,048,576 elements in 0.38ms
+⚡ Quantized 1,048,576 elements in 0.43ms
+⚡ Quantized 1,048,576 elements in 0.50ms
+⚡ Quantized 1,048,576 elements in 0.51ms
+⚡ Quantized 1,048,576 elements in 0.49ms
+⚡ Quantized 1,048,576 elements in 0.48ms
+⚡ Quantized 1,048,576 elements in 0.49ms
+⚡ Quantized 1,048,576 elements in 0.56ms
+⚡ Quantized 1,048,576 elements in 0.57ms
+    CPU: 121.37ms (17.69 GFLOPS)
+    CUDA: 3.16ms (678.53 GFLOPS, 38.35x speedup)
+    Quantization: 0.68ms (1531.0 Melem/s)
+
+🎯 Testing 2048x2048 matrices...
+  🖥 Testing CPU kernel...
+🖥 CPU kernel: 2048x2048 @ 2048x2048 in 927.01ms
+🖥 CPU kernel: 2048x2048 @ 2048x2048 in 894.97ms
+🖥 CPU kernel: 2048x2048 @ 2048x2048 in 994.99ms
+🖥 CPU kernel: 2048x2048 @ 2048x2048 in 990.68ms
+🖥 CPU kernel: 2048x2048 @ 2048x2048 in 977.30ms
+  🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 4.76ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.84ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.86ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 4.14ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 4.19ms
+  ⚠ CPU and CUDA results differ
+  ⚡ Testing quantization kernel...
+⚡ Quantized 4,194,304 elements in 1.95ms
+⚡ Quantized 4,194,304 elements in 1.81ms
+⚡ Quantized 4,194,304 elements in 1.88ms
+⚡ Quantized 4,194,304 elements in 1.81ms
+⚡ Quantized 4,194,304 elements in 1.68ms
+⚡ Quantized 4,194,304 elements in 1.60ms
+⚡ Quantized 4,194,304 elements in 1.67ms
+⚡ Quantized 4,194,304 elements in 1.57ms
+⚡ Quantized 4,194,304 elements in 1.57ms
+⚡ Quantized 4,194,304 elements in 1.59ms
+    CPU: 957.40ms (17.94 GFLOPS)
+    CUDA: 12.00ms (1431.31 GFLOPS, 79.76x speedup)
+    Quantization: 2.17ms (1932.1 Melem/s)
+
+🏆 CUSTOM KERNEL PERFORMANCE SUMMARY
+==================================================
+
+256x256 matrices:
+  CPU: 16.95 GFLOPS
+  CUDA: 0.04 GFLOPS
+  Quantization: 1034.1 Melem/s
+
+512x512 matrices:
+  CPU: 18.09 GFLOPS
+  CUDA: 283.10 GFLOPS
+  Quantization: 2899.2 Melem/s
+
+1024x1024 matrices:
+  CPU: 17.69 GFLOPS
+  CUDA: 678.53 GFLOPS
+  Quantization: 1531.0 Melem/s
+
+2048x2048 matrices:
+  CPU: 17.94 GFLOPS
+  CUDA: 1431.31 GFLOPS
+  Quantization: 1932.1 Melem/s
+
+✅ CUSTOM KERNEL DEMONSTRATION COMPLETE!
+💪 Raw performance achieved through custom compilation!
+
+🎉 KERNEL COMPILATION SUCCESSFUL!
