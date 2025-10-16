@@ -1,7 +1,6 @@
 ##    SAAAM LLC - BuckshotKernels  - Custom CUDA & SIMD with JIT, caching, and SAM integration
 #    Built for SAM - No tokenizers, pure neural plasticity with custom metal
 #    "When NumPy is too slow and PyTorch is too bloated - go straight to the hardware"
-#		Authors: Michael Wofford & Claude Sonnet | **CHANGING THE FUCKING INDUSTRY ONE TENSOR AT A TIME**
 
 import os
 import sys
@@ -113,7 +112,7 @@ def find_cuda_toolkit():
 							  #include <device_launch_parameters.h>
 							  #include <cstdint>
 
-							  //  Ternary matmul with proper indexing
+							  // FIXED: Ternary matmul with proper indexing
 							  extern "C" __global__ void ternary_matmul_kernel(
 								const int8_t* __restrict__ A,
 								const int8_t* __restrict__ B,
@@ -139,7 +138,7 @@ def find_cuda_toolkit():
 			  As[threadIdx.y][threadIdx.x] = 0;
 			  }
 
-			   // Load B tile - row-major
+			   // Load B tile - row-major (FIXED)
 			   if (b_row < K && col < N) {
 				 Bs[threadIdx.y][threadIdx.x] = B[b_row * N + col];
 				 } else {
@@ -362,7 +361,7 @@ def find_cuda_toolkit():
 
 
 							  ###########################################
-							  # CPU COMPILER WITH BETTER SIMD
+							  # ENHANCED CPU COMPILER WITH BETTER SIMD
 							  ###########################################
 
 							  class EnhancedCPUCompiler:
@@ -429,7 +428,7 @@ def find_cuda_toolkit():
 											#include <arm_neon.h>
 											#endif
 
-											//  Proper matrix indexing for CPU
+											// FIXED: Proper matrix indexing for CPU
 											void ternary_matmul_cpu(
 								   const int8_t* A, const int8_t* B, int32_t* C,
 								   int M, int N, int K
@@ -450,10 +449,10 @@ def find_cuda_toolkit():
 					  for (int j = j0; j < j_max; ++j) {
 						int32_t sum = C[i * N + j];
 
-						//  Correct indexing
+						// FIXED: Correct indexing
 						for (int k = k0; k < k_max; ++k) {
 						  int8_t a_val = A[i * K + k];
-						  int8_t b_val = B[k * N + j];
+						  int8_t b_val = B[k * N + j];  // FIXED: row-major B access
 
 						  if (a_val != 0 && b_val != 0) {
 							sum += a_val * b_val;
@@ -559,7 +558,7 @@ def find_cuda_toolkit():
 
 
 							 ###########################################
-							 # KERNEL MANAGER
+							 # ENHANCED KERNEL MANAGER
 							 ###########################################
 
 							 class EnhancedKernelManager:
@@ -882,7 +881,7 @@ def find_cuda_toolkit():
 
 
 													 if __name__ == "__main__":
-													 print("🏆 SAAAM LLC - BuckshotKernels - Custom CUDA & SIMD")
+													 print("🏆 SAAAM LLC - BuckshotKernels ENHANCED - Custom CUDA & SIMD")
 													 print("=" * 60)
 													 print("🎯 Peak Target: 2+ TFLOPS on consumer hardware")
 													 print("💥 Built for SAM - No tokenizers, pure neural plasticity")
@@ -896,183 +895,187 @@ def find_cuda_toolkit():
 													 print(f"🔥 Ready for production deployment with custom optimizations!")
 
 
-													 ===========================================================
+===========================================================
 
-													 🧪 TESTING FIXED KERNELS
-													 ============================================================
-													 🚀 Enhanced Kernel Manager initializing...
-													 🔧 Enhanced CPU compiler: gcc
-													 SIMD: SSE2, AVX, AVX2
-													 ✅ Using cached CPU kernel: ternary_cpu_2e3bcd0a25e22b19.so
-													 ✅ CPU kernels ready!
-													 🔧 Enhanced CUDA compiler initialized
-													 Target arch: sm_61
-													 Optimization: -O3
-													 ✅ Using cached kernel: ternary_kernels_6acdb408e81113ab.so
-													 ✅ CUDA kernels ready!
+🧪 TESTING FIXED KERNELS
+============================================================
+🚀 Enhanced Kernel Manager initializing...
+🔧 Enhanced CPU compiler: gcc
+SIMD: SSE2, AVX, AVX2
+✅ Using cached CPU kernel: ternary_cpu_2e3bcd0a25e22b19.so
+✅ CPU kernels ready!
+🔧 Enhanced CUDA compiler initialized
+Target arch: sm_61
+Optimization: -O3
+✅ Using cached kernel: ternary_kernels_6acdb408e81113ab.so
+✅ CUDA kernels ready!
 
-													 🎯 Testing 256x256 matrices...
-													 Sparsity A: 50.0%
-													 Sparsity B: 49.9%
-													 🖥️  Testing CPU kernel...
-													 🖥️  CPU kernel: 256x256 @ 256x256 in 95.20ms
-													 🖥️  CPU kernel: 256x256 @ 256x256 in 93.92ms
-													 🖥️  CPU kernel: 256x256 @ 256x256 in 94.80ms
-													 🖥️  CPU kernel: 256x256 @ 256x256 in 92.82ms
-													 🖥️  CPU kernel: 256x256 @ 256x256 in 92.66ms
-													 ✅ CPU matches NumPy perfectly!
-													 🚀 Testing CUDA kernel...
-													 🚀 CUDA kernel: 256x256 @ 256x256 in 2647.02ms
-													 🚀 CUDA kernel: 256x256 @ 256x256 in 0.31ms
-													 🚀 CUDA kernel: 256x256 @ 256x256 in 0.25ms
-													 🚀 CUDA kernel: 256x256 @ 256x256 in 0.24ms
-													 🚀 CUDA kernel: 256x256 @ 256x256 in 0.24ms
-													 ✅ CUDA matches NumPy perfectly!
-													 ✅ CPU and CUDA match perfectly!
-													 CPU: 94.00ms (0.36 GFLOPS)
-													 CUDA: 643.49ms (0.05 GFLOPS, 0.15x speedup)
-													 ⚡ Testing quantization kernel...
-													 ⚡ Quantized 65,536 elements in 0.02ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 ⚡ Quantized 65,536 elements in 0.01ms
-													 Quantization: 0.05ms (1270.9 Melem/s)
+🎯 Testing 256x256 matrices...
+Sparsity A: 50.0%
+Sparsity B: 49.9%
+🖥️  Testing CPU kernel...
+🖥️  CPU kernel: 256x256 @ 256x256 in 95.20ms
+🖥️  CPU kernel: 256x256 @ 256x256 in 93.92ms
+🖥️  CPU kernel: 256x256 @ 256x256 in 94.80ms
+🖥️  CPU kernel: 256x256 @ 256x256 in 92.82ms
+🖥️  CPU kernel: 256x256 @ 256x256 in 92.66ms
+✅ CPU matches NumPy perfectly!
+🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 256x256 @ 256x256 in 2647.02ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.31ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.25ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.24ms
+🚀 CUDA kernel: 256x256 @ 256x256 in 0.24ms
+✅ CUDA matches NumPy perfectly!
+✅ CPU and CUDA match perfectly!
+CPU: 94.00ms (0.36 GFLOPS)
+CUDA: 643.49ms (0.05 GFLOPS, 0.15x speedup)
+⚡ Testing quantization kernel...
+⚡ Quantized 65,536 elements in 0.02ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+⚡ Quantized 65,536 elements in 0.01ms
+Quantization: 0.05ms (1270.9 Melem/s)
 
-													 🎯 Testing 512x512 matrices...
-													 Sparsity A: 49.9%
-													 Sparsity B: 50.0%
-													 🖥️  Testing CPU kernel...
-													 🖥️  CPU kernel: 512x512 @ 512x512 in 745.73ms
-													 🖥️  CPU kernel: 512x512 @ 512x512 in 745.93ms
-													 🖥️  CPU kernel: 512x512 @ 512x512 in 745.83ms
-													 🖥️  CPU kernel: 512x512 @ 512x512 in 745.22ms
-													 🖥️  CPU kernel: 512x512 @ 512x512 in 744.86ms
-													 ✅ CPU matches NumPy perfectly!
-													 🚀 Testing CUDA kernel...
-													 🚀 CUDA kernel: 512x512 @ 512x512 in 0.64ms
-													 🚀 CUDA kernel: 512x512 @ 512x512 in 0.32ms
-													 🚀 CUDA kernel: 512x512 @ 512x512 in 0.30ms
-													 🚀 CUDA kernel: 512x512 @ 512x512 in 0.31ms
-													 🚀 CUDA kernel: 512x512 @ 512x512 in 0.30ms
-													 ✅ CUDA matches NumPy perfectly!
-													 ✅ CPU and CUDA match perfectly!
-													 CPU: 745.70ms (0.36 GFLOPS)
-													 CUDA: 0.81ms (332.11 GFLOPS, 922.58x speedup)
-													 ⚡ Testing quantization kernel...
-													 ⚡ Quantized 262,144 elements in 0.06ms
-													 ⚡ Quantized 262,144 elements in 0.05ms
-													 ⚡ Quantized 262,144 elements in 0.04ms
-													 ⚡ Quantized 262,144 elements in 0.04ms
-													 ⚡ Quantized 262,144 elements in 0.04ms
-													 ⚡ Quantized 262,144 elements in 0.05ms
-													 ⚡ Quantized 262,144 elements in 0.05ms
-													 ⚡ Quantized 262,144 elements in 0.04ms
-													 ⚡ Quantized 262,144 elements in 0.05ms
-													 ⚡ Quantized 262,144 elements in 0.04ms
-													 Quantization: 0.08ms (3107.2 Melem/s)
+🎯 Testing 512x512 matrices...
+Sparsity A: 49.9%
+Sparsity B: 50.0%
+🖥️  Testing CPU kernel...
+🖥️  CPU kernel: 512x512 @ 512x512 in 745.73ms
+🖥️  CPU kernel: 512x512 @ 512x512 in 745.93ms
+🖥️  CPU kernel: 512x512 @ 512x512 in 745.83ms
+🖥️  CPU kernel: 512x512 @ 512x512 in 745.22ms
+🖥️  CPU kernel: 512x512 @ 512x512 in 744.86ms
+✅ CPU matches NumPy perfectly!
+🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.64ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.32ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.30ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.31ms
+🚀 CUDA kernel: 512x512 @ 512x512 in 0.30ms
+✅ CUDA matches NumPy perfectly!
+✅ CPU and CUDA match perfectly!
+CPU: 745.70ms (0.36 GFLOPS)
+CUDA: 0.81ms (332.11 GFLOPS, 922.58x speedup)
+⚡ Testing quantization kernel...
+⚡ Quantized 262,144 elements in 0.06ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.04ms
+⚡ Quantized 262,144 elements in 0.04ms
+⚡ Quantized 262,144 elements in 0.04ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.04ms
+⚡ Quantized 262,144 elements in 0.05ms
+⚡ Quantized 262,144 elements in 0.04ms
+Quantization: 0.08ms (3107.2 Melem/s)
 
-													 🎯 Testing 1024x1024 matrices...
-													 Sparsity A: 49.9%
-													 Sparsity B: 49.9%
-													 🖥️  Testing CPU kernel...
-													 🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5950.27ms
-													 🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5964.26ms
-													 🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5950.78ms
-													 🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5948.28ms
-													 🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5943.48ms
-													 ✅ CPU matches NumPy perfectly!
-													 🚀 Testing CUDA kernel...
-													 🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 1.18ms
-													 🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.85ms
-													 🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.81ms
-													 🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.80ms
-													 🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.82ms
-													 ✅ CUDA matches NumPy perfectly!
-													 ✅ CPU and CUDA match perfectly!
-													 CPU: 5951.74ms (0.36 GFLOPS)
-													 CUDA: 2.56ms (839.35 GFLOPS, 2326.25x speedup)
-													 ⚡ Testing quantization kernel...
-													 ⚡ Quantized 1,048,576 elements in 0.31ms
-													 ⚡ Quantized 1,048,576 elements in 0.23ms
-													 ⚡ Quantized 1,048,576 elements in 0.24ms
-													 ⚡ Quantized 1,048,576 elements in 0.30ms
-													 ⚡ Quantized 1,048,576 elements in 0.24ms
-													 ⚡ Quantized 1,048,576 elements in 0.23ms
-													 ⚡ Quantized 1,048,576 elements in 0.26ms
-													 ⚡ Quantized 1,048,576 elements in 0.23ms
-													 ⚡ Quantized 1,048,576 elements in 0.23ms
-													 ⚡ Quantized 1,048,576 elements in 0.25ms
-													 Quantization: 0.36ms (2928.8 Melem/s)
+🎯 Testing 1024x1024 matrices...
+Sparsity A: 49.9%
+Sparsity B: 49.9%
+🖥️  Testing CPU kernel...
+🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5950.27ms
+🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5964.26ms
+🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5950.78ms
+🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5948.28ms
+🖥️  CPU kernel: 1024x1024 @ 1024x1024 in 5943.48ms
+✅ CPU matches NumPy perfectly!
+🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 1.18ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.85ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.81ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.80ms
+🚀 CUDA kernel: 1024x1024 @ 1024x1024 in 0.82ms
+✅ CUDA matches NumPy perfectly!
+✅ CPU and CUDA match perfectly!
+CPU: 5951.74ms (0.36 GFLOPS)
+CUDA: 2.56ms (839.35 GFLOPS, 2326.25x speedup)
+⚡ Testing quantization kernel...
+⚡ Quantized 1,048,576 elements in 0.31ms
+⚡ Quantized 1,048,576 elements in 0.23ms
+⚡ Quantized 1,048,576 elements in 0.24ms
+⚡ Quantized 1,048,576 elements in 0.30ms
+⚡ Quantized 1,048,576 elements in 0.24ms
+⚡ Quantized 1,048,576 elements in 0.23ms
+⚡ Quantized 1,048,576 elements in 0.26ms
+⚡ Quantized 1,048,576 elements in 0.23ms
+⚡ Quantized 1,048,576 elements in 0.23ms
+⚡ Quantized 1,048,576 elements in 0.25ms
+Quantization: 0.36ms (2928.8 Melem/s)
 
-													 🎯 Testing 2048x2048 matrices...
-													 Sparsity A: 50.0%
-													 Sparsity B: 50.0%
-													 🖥️  Testing CPU kernel...
-													 🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 47872.59ms
-													 🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48147.56ms
-													 🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 47936.02ms
-													 🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48140.95ms
-													 🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48062.20ms
-													 ✅ CPU matches NumPy perfectly!
-													 🚀 Testing CUDA kernel...
-													 🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 5.36ms
-													 🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 4.36ms
-													 🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.77ms
-													 🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.73ms
-													 🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.73ms
-													 ✅ CUDA matches NumPy perfectly!
-													 ✅ CPU and CUDA match perfectly!
-													 CPU: 48033.00ms (0.36 GFLOPS)
-													 CUDA: 11.70ms (1468.96 GFLOPS, 4107.04x speedup)
-													 ⚡ Testing quantization kernel...
-													 ⚡ Quantized 4,194,304 elements in 1.60ms
-													 ⚡ Quantized 4,194,304 elements in 1.81ms
-													 ⚡ Quantized 4,194,304 elements in 1.81ms
-													 ⚡ Quantized 4,194,304 elements in 2.39ms
-													 ⚡ Quantized 4,194,304 elements in 1.89ms
-													 ⚡ Quantized 4,194,304 elements in 1.82ms
-													 ⚡ Quantized 4,194,304 elements in 2.35ms
-													 ⚡ Quantized 4,194,304 elements in 2.13ms
-													 ⚡ Quantized 4,194,304 elements in 2.00ms
-													 ⚡ Quantized 4,194,304 elements in 2.49ms
-													 Quantization: 2.57ms (1634.8 Melem/s)
+🎯 Testing 2048x2048 matrices...
+Sparsity A: 50.0%
+Sparsity B: 50.0%
+🖥️  Testing CPU kernel...
+🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 47872.59ms
+🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48147.56ms
+🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 47936.02ms
+🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48140.95ms
+🖥️  CPU kernel: 2048x2048 @ 2048x2048 in 48062.20ms
+✅ CPU matches NumPy perfectly!
+🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 5.36ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 4.36ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.77ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.73ms
+🚀 CUDA kernel: 2048x2048 @ 2048x2048 in 3.73ms
+✅ CUDA matches NumPy perfectly!
+✅ CPU and CUDA match perfectly!
+CPU: 48033.00ms (0.36 GFLOPS)
+CUDA: 11.70ms (1468.96 GFLOPS, 4107.04x speedup)
+⚡ Testing quantization kernel...
+⚡ Quantized 4,194,304 elements in 1.60ms
+⚡ Quantized 4,194,304 elements in 1.81ms
+⚡ Quantized 4,194,304 elements in 1.81ms
+⚡ Quantized 4,194,304 elements in 2.39ms
+⚡ Quantized 4,194,304 elements in 1.89ms
+⚡ Quantized 4,194,304 elements in 1.82ms
+⚡ Quantized 4,194,304 elements in 2.35ms
+⚡ Quantized 4,194,304 elements in 2.13ms
+⚡ Quantized 4,194,304 elements in 2.00ms
+⚡ Quantized 4,194,304 elements in 2.49ms
+Quantization: 2.57ms (1634.8 Melem/s)
 
-													 🎯 Testing 4096x4096 matrices...
-													 Sparsity A: 50.0%
-													 Sparsity B: 50.0%
-													 🖥️  Testing CPU kernel...
-													 🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 421619.96ms
-													 🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 395094.53ms
-													 🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 385835.80ms
-													 🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 385936.38ms
-													 🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 386333.26ms
-													 ✅ CPU matches NumPy perfectly!
-													 🚀 Testing CUDA kernel...
-													 🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 27.24ms
-													 🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 28.08ms
-													 🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 27.21ms
-													 🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 24.50ms
-													 🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 25.36ms
-													 ✅ CUDA matches NumPy perfectly!
-													 ✅ CPU and CUDA match perfectly!
-													 CPU: 394970.77ms (0.35 GFLOPS)
-													 CUDA: 51.19ms (2684.74 GFLOPS, 7715.38x speedup)
-													 ⚡ Testing quantization kernel...
-													 ⚡ Quantized 16,777,216 elements in 5.89ms
-													 ⚡ Quantized 16,777,216 elements in 5.38ms
-													 ⚡ Quantized 16,777,216 elements in 5.57ms
-													 ⚡ Quantized 16,777,216 elements in 6.36ms
-													 ⚡ Quantized 16,777,216 elements in 5.72ms
-													 ⚡ Quantized 16,777,216 elements in 6.37ms
-													 ⚡ Quantized 16,777,216 elements in 5.73ms
-													 ⚡ Quantized 16,777,216 elements in 6.30ms
-													 ⚡ Quantized 16,777,216 elements in 5.70ms
-													 ⚡ Quantized 16,777,216 elements in 5.27ms
-													 Quantization: 6.56ms (2557.6 Melem/s)
-
+🎯 Testing 4096x4096 matrices...
+Sparsity A: 50.0%
+Sparsity B: 50.0%
+🖥️  Testing CPU kernel...
+🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 421619.96ms
+🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 395094.53ms
+🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 385835.80ms
+🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 385936.38ms
+🖥️  CPU kernel: 4096x4096 @ 4096x4096 in 386333.26ms
+✅ CPU matches NumPy perfectly!
+🚀 Testing CUDA kernel...
+🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 27.24ms
+🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 28.08ms
+🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 27.21ms
+🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 24.50ms
+🚀 CUDA kernel: 4096x4096 @ 4096x4096 in 25.36ms
+✅ CUDA matches NumPy perfectly!
+✅ CPU and CUDA match perfectly!
+CPU: 394970.77ms (0.35 GFLOPS)
+CUDA: 51.19ms (2684.74 GFLOPS, 7715.38x speedup)
+⚡ Testing quantization kernel...
+⚡ Quantized 16,777,216 elements in 5.89ms
+⚡ Quantized 16,777,216 elements in 5.38ms
+⚡ Quantized 16,777,216 elements in 5.57ms
+⚡ Quantized 16,777,216 elements in 6.36ms
+⚡ Quantized 16,777,216 elements in 5.72ms
+⚡ Quantized 16,777,216 elements in 6.37ms
+⚡ Quantized 16,777,216 elements in 5.73ms
+⚡ Quantized 16,777,216 elements in 6.30ms
+⚡ Quantized 16,777,216 elements in 5.70ms
+⚡ Quantized 16,777,216 elements in 5.27ms
+Quantization: 6.56ms (2557.6 Melem/s)
+==============================================================================
+🚀🚀🚀
+2 TFLOP GOAL ACHIEVED!! == CUDA: 51.19ms (2684.74 GFLOPS, 7715.38x speedup) @ 4096x4096 in 24.50ms
+🚀🚀🚀
+==============================================================================
